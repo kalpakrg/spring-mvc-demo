@@ -39,6 +39,11 @@
 	background-color: #ddd;
 	padding: 10px 5px;
 }
+
+#results > .nodata {
+	text-align: center;
+	padding: 20px 0;
+}
 </style>
 <script type="text/javascript">
 	jQuery(document).ready(function() {
@@ -64,23 +69,28 @@
 	}
 	
 	function showRestaurants(data) {
-		console.log('Got data: ' + data)
+		console.log("Showing restaurants");
+
 		var target = jQuery("#results");
 
-		target.append('<h2 class="location">Showing restaurants near ' + data.address + '</h2>')
-		data.restaurants.forEach(
-			function(resto) {
-				var resto = 
-				target.append('<div class="resto">' +
-				'<h3 class="name">' + resto.name + '</h3>' +
-				'<h4 class="address">Address: ' + resto.vicinity + '</h4>' +
-				'<h4 class="open">Open Now: ' + resto.openNowStatus + '</h4>' +
-				'<h4 class="rating">Rating: ' + resto.rating + '</h4>' +
-				'</div>');
-			}
-		);
-
-		console.log("Showing restaurants");
+		target.html('');
+		
+		if (!data.success) {
+			target.append('<h2 class="nodata">No restaurants found!</h2>')
+		} else {
+			target.append('<h2 class="location">Showing restaurants near ' + data.address + '</h2>')
+			data.restaurants.forEach(
+				function(resto) {
+					var resto = 
+					target.append('<div class="resto">' +
+					'<h3 class="name">' + resto.name + '</h3>' +
+					'<h4 class="address">Address: ' + resto.vicinity + '</h4>' +
+					'<h4 class="open">Open Now: ' + resto.openNowStatus + '</h4>' +
+					'<h4 class="rating">Rating: ' + resto.rating + '</h4>' +
+					'</div>');
+				}
+			);
+		}
 	}
 </script>
 </head>

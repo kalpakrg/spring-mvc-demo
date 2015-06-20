@@ -7,11 +7,16 @@ import java.util.List;
 public class NearbyRestaurantsResponse {
     private final String address;
     private final List<Restaurant> restaurants;
-
-    public NearbyRestaurantsResponse(String address, List<Restaurant> restaurants) {
+    private final boolean success;
+    public NearbyRestaurantsResponse(String address, List<Restaurant> restaurants, boolean success) {
         super();
         this.address = address;
         this.restaurants = new ArrayList<Restaurant>(restaurants);
+        this.success = success;
+    }
+    
+    public boolean isSuccess() {
+        return success;
     }
 
     public String getAddress() {
