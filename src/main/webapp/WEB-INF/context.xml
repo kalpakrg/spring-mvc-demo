@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jaxrs-client="http://cxf.apache.org/jaxrs-client"
+	xmlns:cxf="http://cxf.apache.org/core"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://cxf.apache.org/jaxrs-client http://cxf.apache.org/schemas/jaxrs-client.xsd
+        http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+	<mvc:annotation-driven/>
+
+	<bean id="logOutbound" class="org.apache.cxf.interceptor.LoggingOutInterceptor">
+		<property name="prettyLogging" value="true"/>
+	</bean>
+	
+	<bean id="logInbound" class="org.apache.cxf.interceptor.LoggingInInterceptor">
+		<property name="prettyLogging" value="true"/>
+	</bean>
+	
+	<!-- CXF Configuration -->
+	<cxf:bus name="cxf">
+		<cxf:properties>
+		    <entry key="use.async.http.conduit" value="true" />
+		</cxf:properties>
+        <cxf:outInterceptors>
+            <ref bean="logOutbound"/>
+        </cxf:outInterceptors>
+        <cxf:inInterceptors>
+            <ref bean="logInbound"/>
+        </cxf:inInterceptors>
+	</cxf:bus>
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<jaxrs-client:client id="googleMapsApi" address="https://maps.googleapis.com/"
+		serviceClass="com.test.springmvcdemo.services.googlemaps.GoogleMapsApi" inheritHeaders="true" bus="cxf">
+		<jaxrs-client:headers>
+			<entry key="Accept" value="text/xml" />
+		</jaxrs-client:headers>
+	</jaxrs-client:client>
+
+	<jaxrs-client:client id="googlePlacesApi" address="https://maps.googleapis.com/"
+		serviceClass="com.test.springmvcdemo.services.googleplaces.GooglePlacesApi" inheritHeaders="true" bus="cxf">
+		<jaxrs-client:headers>
+			<entry key="Accept" value="text/xml" />
+		</jaxrs-client:headers>
+	</jaxrs-client:client>
+
+	<bean id="apiController" class="com.test.springmvcdemo.controllers.ApiController">
+		<constructor-arg ref="googleMapsApi"/>
+		<constructor-arg ref="googlePlacesApi"/>
+	</bean>
+</beans>
