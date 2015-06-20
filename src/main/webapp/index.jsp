@@ -97,7 +97,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<form
+			<div
 				class="form-inline search col-md-6 col-md-offset-3">
 				<div class="form-group">
 					<div class="input-group">
@@ -106,7 +106,7 @@
 					</div>
 				</div>
 				<button id="search" type="button" class="btn btn-primary">Search</button>
-			</form>
+			</div>
 			<div id="results" class="col-md-8 col-md-offset-2">
 			
 			</div>
