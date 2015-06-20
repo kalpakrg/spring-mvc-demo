@@ -20,64 +20,51 @@ import com.test.springmvcdemo.services.googleplaces.PlaceSearchResponse;
 
 @RestController
 public class ApiController {
-	private static final Logger LOG = LoggerFactory
-			.getLogger(ApiController.class);
-	private static final String GPLACES_API_KEY = "AIzaSyBwBOnEAjWHFLyLvJFImWqr1TQAz4uz9NA";
+    private static final Logger LOG = LoggerFactory.getLogger(ApiController.class);
+    private static final String GPLACES_API_KEY = "AIzaSyBwBOnEAjWHFLyLvJFImWqr1TQAz4uz9NA";
 
-	private final GoogleMapsApi gmapsApi;
-	private final GooglePlacesApi gplacesApi;
+    private final GoogleMapsApi gmapsApi;
+    private final GooglePlacesApi gplacesApi;
 
-	@Autowired
-	public ApiController(GoogleMapsApi mapsGeocodeApi,
-			GooglePlacesApi gplacesApi) {
-		super();
-		this.gmapsApi = mapsGeocodeApi;
-		this.gplacesApi = gplacesApi;
-	}
+    @Autowired
+    public ApiController(GoogleMapsApi mapsGeocodeApi, GooglePlacesApi gplacesApi) {
+        super();
+        this.gmapsApi = mapsGeocodeApi;
+        this.gplacesApi = gplacesApi;
+    }
 
-	@RequestMapping(value = "/address/{pin}", method = RequestMethod.GET)
-	public @ResponseBody List<PlaceSearchResponse.Result> findNearbyRestaurants(
-			@PathVariable String pin) {
-		GeocodeResponse searchResponse = gmapsApi.search(pin);
+    @RequestMapping(value = "/address/{pin}", method = RequestMethod.GET)
+    public @ResponseBody NearbyRestaurantsResponse findNearbyRestaurants(@PathVariable String pin) {
+        GeocodeResponse searchResponse = gmapsApi.search(pin);
 
-		LOG.info("In resolve address action: " + gmapsApi.search(pin));
-		LOG.info("Found Place ID: " + searchResponse.getResult().getPlaceId());
+        LOG.info("In resolve address action: " + gmapsApi.search(pin));
+        LOG.info("Found Place ID: " + searchResponse.getResult().getPlaceId());
 
-		PlaceDetailsResponse placeDetails = gplacesApi.getPlaceDetails(
-				searchResponse.getResult().getPlaceId(), GPLACES_API_KEY);
+        PlaceDetailsResponse placeDetails = gplacesApi.getPlaceDetails(searchResponse.getResult().getPlaceId(), GPLACES_API_KEY);
 
-		LOG.info("Found place details: " + placeDetails);
+        LOG.info("Found place details: " + placeDetails);
 
-		LOG.info("Resolved address for pincode: " + pin + " as: "
-				+ placeDetails.getResult().getFormattedAddress());
+        LOG.info("Resolved address for pincode: " + pin + " as: " + placeDetails.getResult().getFormattedAddress());
 
-		String location = searchResponse.getResult().getGeometry()
-				.getLocation().getLat()
-				+ ","
-				+ searchResponse.getResult().getGeometry().getLocation()
-						.getLng();
+        String location = searchResponse.getResult().getGeometry().getLocation().getLat() + ","
+                + searchResponse.getResult().getGeometry().getLocation().getLng();
 
-		PlaceSearchResponse placesResult = gplacesApi.nearbySearch(
-				GPLACES_API_KEY, location, "distance", "food|restaurant");
+        PlaceSearchResponse placesResult = gplacesApi.nearbySearch(GPLACES_API_KEY, location, "distance", "food|restaurant");
 
-		LOG.info("Found nearby restaurants: " + placesResult.getResults());
+        LOG.info("Found nearby restaurants: " + placesResult.getResults());
 
-		List<NearbyRestaurantsResponse.Restaurant> nearbyRestaurants = new ArrayList<NearbyRestaurantsResponse.Restaurant>(
-				placesResult.getResults().size());
+        List<NearbyRestaurantsResponse.Restaurant> nearbyRestaurants = new ArrayList<NearbyRestaurantsResponse.Restaurant>(placesResult.getResults()
+                .size());
 
-		for (PlaceSearchResponse.Result r : placesResult.getResults()) {
-			nearbyRestaurants.add(new NearbyRestaurantsResponse.Restaurant(r
-					.getName(), r.getRating(), r.getVicinity(),
-					getRestaurantOpeningHoursStatus(r)));
-		}
+        for (PlaceSearchResponse.Result r : placesResult.getResults()) {
+            nearbyRestaurants.add(new NearbyRestaurantsResponse.Restaurant(r.getName(), r.getRating(), r.getVicinity(),
+                    humanifyRestaurantOpeningHoursStatus(r)));
+        }
 
-		NearbyRestaurantsResponse response = new NearbyRestaurantsResponse();
+        return new NearbyRestaurantsResponse(searchResponse.getResult().getFormattedAddress(), nearbyRestaurants);
+    }
 
-		return placesResult.getResults();
-	}
-
-	private String getRestaurantOpeningHoursStatus(PlaceSearchResponse.Result r) {
-		return r.getOpeningHours() == null ? "NA" : r.getOpeningHours()
-				.isOpenNow() ? "Yes" : "No";
-	}
+    private String humanifyRestaurantOpeningHoursStatus(PlaceSearchResponse.Result r) {
+        return r.getOpeningHours() == null ? "NA" : r.getOpeningHours().isOpenNow() ? "Yes" : "No";
+    }
 }

@@ -6,7 +6,7 @@ import javax.ws.rs.QueryParam;
 
 @Path("/maps/api")
 public interface GoogleMapsApi {
-	@Path("/geocode/xml")
-	@GET
-	GeocodeResponse search(@QueryParam("address") String address);
+    @Path("/geocode/xml")
+    @GET
+    GeocodeResponse search(@QueryParam("address") String address);
 }

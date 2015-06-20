@@ -11,295 +11,286 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "PlaceDetailsResponse")
 public class PlaceDetailsResponse {
-	private String status;
-	private Result result;
-	
-	public String getStatus() {
-		return status;
-	}
+    private String status;
+    private Result result;
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public Result getResult() {
-		return result;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	public void setResult(Result result) {
-		this.result = result;
-	}
+    public Result getResult() {
+        return result;
+    }
 
-	@Override
-	public String toString() {
-		return "PlaceDetailsResponse [status=" + status + ", result=" + result
-				+ "]";
-	}
+    public void setResult(Result result) {
+        this.result = result;
+    }
 
-	@XmlAccessorType(XmlAccessType.FIELD)
-	public static class Result {
-		private String name;
-		private String vicinity;
-		private String type;
+    @Override
+    public String toString() {
+        return "PlaceDetailsResponse [status=" + status + ", result=" + result + "]";
+    }
 
-		private String url;
-		private String icon;
-		private String reference;
-		private String id;
+    @XmlAccessorType(XmlAccessType.FIELD)
+    public static class Result {
+        private String name;
+        private String vicinity;
+        private String type;
 
-		@XmlElement(name = "place_id")
-		private String placeId;
-		private String scope;
+        private String url;
+        private String icon;
+        private String reference;
+        private String id;
 
-		@XmlElement(name = "adr_address")
-		private String adrAddress;
+        @XmlElement(name = "place_id")
+        private String placeId;
+        private String scope;
 
-		@XmlElement(name = "formatted_address")
-		private String formattedAddress;
+        @XmlElement(name = "adr_address")
+        private String adrAddress;
 
-		@XmlElement(name = "address_component")
-		private List<AddressComponent> addressCoomponents;
+        @XmlElement(name = "formatted_address")
+        private String formattedAddress;
 
-		private Geometry geometry;
-		
-		public Geometry getGeometry() {
-			return geometry;
-		}
+        @XmlElement(name = "address_component")
+        private List<AddressComponent> addressCoomponents;
 
-		public void setGeometry(Geometry geometry) {
-			this.geometry = geometry;
-		}
+        private Geometry geometry;
 
-		public String getName() {
-			return name;
-		}
+        public Geometry getGeometry() {
+            return geometry;
+        }
 
-		public void setName(String name) {
-			this.name = name;
-		}
+        public void setGeometry(Geometry geometry) {
+            this.geometry = geometry;
+        }
 
-		public String getVicinity() {
-			return vicinity;
-		}
+        public String getName() {
+            return name;
+        }
 
-		public void setVicinity(String vicinity) {
-			this.vicinity = vicinity;
-		}
+        public void setName(String name) {
+            this.name = name;
+        }
 
-		public String getType() {
-			return type;
-		}
+        public String getVicinity() {
+            return vicinity;
+        }
 
-		public void setType(String type) {
-			this.type = type;
-		}
+        public void setVicinity(String vicinity) {
+            this.vicinity = vicinity;
+        }
 
-		public String getUrl() {
-			return url;
-		}
+        public String getType() {
+            return type;
+        }
 
-		public void setUrl(String url) {
-			this.url = url;
-		}
+        public void setType(String type) {
+            this.type = type;
+        }
 
-		public String getIcon() {
-			return icon;
-		}
+        public String getUrl() {
+            return url;
+        }
 
-		public void setIcon(String icon) {
-			this.icon = icon;
-		}
+        public void setUrl(String url) {
+            this.url = url;
+        }
 
-		public String getReference() {
-			return reference;
-		}
+        public String getIcon() {
+            return icon;
+        }
 
-		public void setReference(String reference) {
-			this.reference = reference;
-		}
+        public void setIcon(String icon) {
+            this.icon = icon;
+        }
 
-		public String getId() {
-			return id;
-		}
+        public String getReference() {
+            return reference;
+        }
 
-		public void setId(String id) {
-			this.id = id;
-		}
+        public void setReference(String reference) {
+            this.reference = reference;
+        }
 
-		public String getPlaceId() {
-			return placeId;
-		}
+        public String getId() {
+            return id;
+        }
 
-		public void setPlaceId(String placeId) {
-			this.placeId = placeId;
-		}
+        public void setId(String id) {
+            this.id = id;
+        }
 
-		public String getScope() {
-			return scope;
-		}
+        public String getPlaceId() {
+            return placeId;
+        }
 
-		public void setScope(String scope) {
-			this.scope = scope;
-		}
+        public void setPlaceId(String placeId) {
+            this.placeId = placeId;
+        }
 
-		public String getAdrAddress() {
-			return adrAddress;
-		}
+        public String getScope() {
+            return scope;
+        }
 
-		public void setAdrAddress(String adrAddress) {
-			this.adrAddress = adrAddress;
-		}
+        public void setScope(String scope) {
+            this.scope = scope;
+        }
 
-		public String getFormattedAddress() {
-			return formattedAddress;
-		}
+        public String getAdrAddress() {
+            return adrAddress;
+        }
 
-		public void setFormattedAddress(String formattedAddress) {
-			this.formattedAddress = formattedAddress;
-		}
+        public void setAdrAddress(String adrAddress) {
+            this.adrAddress = adrAddress;
+        }
 
-		public List<AddressComponent> getAddressCoomponents() {
-			return addressCoomponents;
-		}
+        public String getFormattedAddress() {
+            return formattedAddress;
+        }
 
-		public void setAddressCoomponents(
-				List<AddressComponent> addressCoomponents) {
-			this.addressCoomponents = addressCoomponents;
-		}
+        public void setFormattedAddress(String formattedAddress) {
+            this.formattedAddress = formattedAddress;
+        }
 
-		@Override
-		public String toString() {
-			return "Result [name=" + name + ", vicinity=" + vicinity
-					+ ", type=" + type + ", url=" + url + ", icon=" + icon
-					+ ", reference=" + reference + ", id=" + id + ", placeId="
-					+ placeId + ", scope=" + scope + ", adrAddress="
-					+ adrAddress + ", formattedAddress=" + formattedAddress
-					+ ", addressCoomponents=" + addressCoomponents
-					+ ", geometry=" + geometry + "]";
-		}
-	}
+        public List<AddressComponent> getAddressCoomponents() {
+            return addressCoomponents;
+        }
 
-	@XmlRootElement
-	@XmlAccessorType(XmlAccessType.FIELD)
-	public static class AddressComponent {
-		private String longName;
-		private String shortName;
-		private String type;
+        public void setAddressCoomponents(List<AddressComponent> addressCoomponents) {
+            this.addressCoomponents = addressCoomponents;
+        }
 
-		public String getLongName() {
-			return longName;
-		}
+        @Override
+        public String toString() {
+            return "Result [name=" + name + ", vicinity=" + vicinity + ", type=" + type + ", url=" + url + ", icon=" + icon + ", reference="
+                    + reference + ", id=" + id + ", placeId=" + placeId + ", scope=" + scope + ", adrAddress=" + adrAddress + ", formattedAddress="
+                    + formattedAddress + ", addressCoomponents=" + addressCoomponents + ", geometry=" + geometry + "]";
+        }
+    }
 
-		public void setLongName(String longName) {
-			this.longName = longName;
-		}
+    @XmlRootElement
+    @XmlAccessorType(XmlAccessType.FIELD)
+    public static class AddressComponent {
+        private String longName;
+        private String shortName;
+        private String type;
 
-		public String getShortName() {
-			return shortName;
-		}
+        public String getLongName() {
+            return longName;
+        }
 
-		public void setShortName(String shortName) {
-			this.shortName = shortName;
-		}
+        public void setLongName(String longName) {
+            this.longName = longName;
+        }
 
-		public String getType() {
-			return type;
-		}
+        public String getShortName() {
+            return shortName;
+        }
 
-		public void setType(String type) {
-			this.type = type;
-		}
+        public void setShortName(String shortName) {
+            this.shortName = shortName;
+        }
 
-		@Override
-		public String toString() {
-			return "AddressComponent [longName=" + longName + ", shortName="
-					+ shortName + ", type=" + type + "]";
-		}
-	}
+        public String getType() {
+            return type;
+        }
 
-	@XmlRootElement
-	@XmlAccessorType(XmlAccessType.FIELD)
-	public static class Geometry {
-		private Location location;
-		private Viewport viewport;
+        public void setType(String type) {
+            this.type = type;
+        }
 
-		public Location getLocation() {
-			return location;
-		}
+        @Override
+        public String toString() {
+            return "AddressComponent [longName=" + longName + ", shortName=" + shortName + ", type=" + type + "]";
+        }
+    }
 
-		public void setLocation(Location location) {
-			this.location = location;
-		}
+    @XmlRootElement
+    @XmlAccessorType(XmlAccessType.FIELD)
+    public static class Geometry {
+        private Location location;
+        private Viewport viewport;
 
-		public Viewport getViewport() {
-			return viewport;
-		}
+        public Location getLocation() {
+            return location;
+        }
 
-		public void setViewport(Viewport viewport) {
-			this.viewport = viewport;
-		}
+        public void setLocation(Location location) {
+            this.location = location;
+        }
 
-		@Override
-		public String toString() {
-			return "Geometry [location=" + location + ", viewport=" + viewport
-					+ "]";
-		}
-	}
+        public Viewport getViewport() {
+            return viewport;
+        }
 
-	@XmlRootElement
-	@XmlAccessorType(XmlAccessType.FIELD)
-	public static class Viewport {
-		private Location southwest;
-		private Location northeast;
+        public void setViewport(Viewport viewport) {
+            this.viewport = viewport;
+        }
 
-		public Location getSouthwest() {
-			return southwest;
-		}
+        @Override
+        public String toString() {
+            return "Geometry [location=" + location + ", viewport=" + viewport + "]";
+        }
+    }
 
-		public void setSouthwest(Location southwest) {
-			this.southwest = southwest;
-		}
+    @XmlRootElement
+    @XmlAccessorType(XmlAccessType.FIELD)
+    public static class Viewport {
+        private Location southwest;
+        private Location northeast;
 
-		public Location getNortheast() {
-			return northeast;
-		}
+        public Location getSouthwest() {
+            return southwest;
+        }
 
-		public void setNortheast(Location northeast) {
-			this.northeast = northeast;
-		}
+        public void setSouthwest(Location southwest) {
+            this.southwest = southwest;
+        }
 
-		@Override
-		public String toString() {
-			return "Viewport [southwest=" + southwest + ", northeast="
-					+ northeast + "]";
-		}
-	}
+        public Location getNortheast() {
+            return northeast;
+        }
 
-	@XmlRootElement
-	@XmlAccessorType(XmlAccessType.FIELD)
-	public static class Location {
-		private BigDecimal lat;
-		private BigDecimal lng;
+        public void setNortheast(Location northeast) {
+            this.northeast = northeast;
+        }
 
-		public BigDecimal getLat() {
-			return lat;
-		}
+        @Override
+        public String toString() {
+            return "Viewport [southwest=" + southwest + ", northeast=" + northeast + "]";
+        }
+    }
 
-		public void setLat(BigDecimal lat) {
-			this.lat = lat;
-		}
+    @XmlRootElement
+    @XmlAccessorType(XmlAccessType.FIELD)
+    public static class Location {
+        private BigDecimal lat;
+        private BigDecimal lng;
 
-		public BigDecimal getLng() {
-			return lng;
-		}
+        public BigDecimal getLat() {
+            return lat;
+        }
 
-		public void setLng(BigDecimal lng) {
-			this.lng = lng;
-		}
+        public void setLat(BigDecimal lat) {
+            this.lat = lat;
+        }
 
-		@Override
-		public String toString() {
-			return "Location [lat=" + lat + ", lng=" + lng + "]";
-		}
-	}
+        public BigDecimal getLng() {
+            return lng;
+        }
+
+        public void setLng(BigDecimal lng) {
+            this.lng = lng;
+        }
+
+        @Override
+        public String toString() {
+            return "Location [lat=" + lat + ", lng=" + lng + "]";
+        }
+    }
 }
